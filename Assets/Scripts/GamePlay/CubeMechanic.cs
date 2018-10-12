@@ -18,7 +18,6 @@ public class CubeMechanic : RunnerController
 	}
 
     override
-
     protected void onClick()
     {
         base.onClick();

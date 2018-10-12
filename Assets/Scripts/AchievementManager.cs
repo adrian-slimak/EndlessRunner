@@ -32,10 +32,10 @@ public class AchievementManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.touchCount > 2)
         {
             Debug.Log("achievementCompleted");
-            AchievementCollected(4);
+            AchievementCollected(1);
         }
     }
 
@@ -45,6 +45,11 @@ public class AchievementManager : MonoBehaviour
             return Instance.achievements;
         else
             return Instance.achievements.FindAll(a => a.category == (int) cat);
+    }
+
+    public static Achievement GetAchievement(int id)
+    {
+        return Instance.achievements[id];
     }
 
     public static void AchievementCollected(int achievID)

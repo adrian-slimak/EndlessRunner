@@ -30,6 +30,8 @@ public class ShipMechanic : RunnerController
 
     void FixedUpdate()
     {
+        if (LevelController.Instance.practiceMode && TimeController.Instance.isRewinding || LevelController.Instance.gamePaused) return;
+
         if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0)
         {
             _rb2d.AddForce(Vector2.up * flyAcceletarion);

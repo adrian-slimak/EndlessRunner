@@ -24,7 +24,7 @@ public class ShapePortal : MonoBehaviour
 
     private void Update()
     {
-        if (!disabled && !particles.isPlaying && Mathf.Abs(transform.position.x - LevelController.Instance.Player.transform.position.x) < 25f)
+        if (!particles.isPlaying && Mathf.Abs(transform.position.x - LevelController.Instance.Player.transform.position.x) < 20f)
             particles.Play();
     }
 
@@ -32,6 +32,7 @@ public class ShapePortal : MonoBehaviour
     {
 
         LevelController.Instance.Player = Instantiate(ShapeType, currentPlayer.transform.position, Quaternion.identity).GetComponent<RunnerController>();
+        if (LevelController.Instance.practiceMode) TimeController.PlayerChanged();
 
         Destroy(currentPlayer.gameObject);
         particles.Stop(true, ParticleSystemStopBehavior.StopEmitting);

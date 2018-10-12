@@ -19,7 +19,14 @@ public class ShopUI : MonoBehaviour
     public Image skinFirst;
     public Image skinSecond;
 
+    public GameObject colorUnlockPanel;
+    public GameObject skinUnlockPanel;
+    public Text playerPoints;
+
+    private static List<ShopItem> shopItems;
     private int mechanicID = 0;
+    private int colorCost = 20;
+    private int colorSelected = -1;
     private SkinInfo skinInfo;
 
     private Sprite[] skinSprites;
@@ -28,8 +35,12 @@ public class ShopUI : MonoBehaviour
 
     private void Start()
     {
+        if (shopItems == null)
+            shopItems = SQLDataBase.LoadShopItems();
+
         skinInfo = GameSettings.Instance.skinInfo[mechanicID];
-        LoadColor();
+        playerPoints.text = "Points: " + PlayerPrefsManager.GetPlayerPoints();
+        SetColorsList();
         LoadSkins();
     }
 
@@ -45,6 +56,21 @@ public class ShopUI : MonoBehaviour
         SceneLoader.LoadLevel("Menu");
     }
 
+    private void SetColorsList()
+    {
+
+        foreach (ShopItem color in shopItems.FindAll(item => item.category == 10))
+        {
+            if (color.unlocked)
+            {
+                Destroy(firstColorList.transform.GetChild(color.number).transform.GetChild(0).gameObject);
+                Destroy(secondColorList.transform.GetChild(color.number).transform.GetChild(0).gameObject);
+            }
+        }
+
+        LoadColor();
+    }
+
     private void LoadColor()
     {
         firstSelect.anchoredPosition = firstColorList.transform.GetChild(skinInfo.firstColorIndex).GetComponent<RectTransform>().anchoredPosition;
@@ -53,20 +79,20 @@ public class ShopUI : MonoBehaviour
 
     private void LoadSkins() //POPRAWIĆ ŚCIEŻKĘ DO SKINÓW
     {
-        skinSprites = Resources.LoadAll<Sprite>("Sprites/" + skinInfo.spriteName);
-        firstSprites = Resources.LoadAll<Sprite>("Sprites/" + skinInfo.spriteName+"_first");
-        secondSprites = Resources.LoadAll<Sprite>("Sprites/" + skinInfo.spriteName+"_second");
-
-        Image[] skinImages = skinList.GetComponentsInChildren<Image>();
+        skinSprites = Resources.LoadAll<Sprite>("Skins/" + skinInfo.spriteName);
+        firstSprites = Resources.LoadAll<Sprite>("Skins/" + skinInfo.spriteName+"_first");
+        secondSprites = Resources.LoadAll<Sprite>("Skins/" + skinInfo.spriteName+"_second");
 
         for (int i = 0; i < skinSprites.Length; i++)
         {
-            skinImages[i].gameObject.SetActive(true);
-            skinImages[i].sprite = skinSprites[i];
+            Transform skin = skinList.transform.GetChild(i);
+            skin.GetComponent<Image>().sprite = skinSprites[i];
+            if (shopItems.Find(item => item.category == mechanicID && item.number == i && item.unlocked) != null)
+                Destroy(skin.GetChild(0).gameObject);
         }
 
-        for (int i = skinSprites.Length; i < skinImages.Length; i++)
-            skinImages[i].gameObject.SetActive(false);
+        for (int i = skinSprites.Length; i < skinList.transform.childCount; i++)
+            skinList.transform.GetChild(i).gameObject.SetActive(false);
 
         skinFirst.color = skinInfo.firstColor;
         skinSecond.color = skinInfo.secondColor;
@@ -85,6 +111,16 @@ public class ShopUI : MonoBehaviour
     public void ColorChoosed(int panel)
     {
         GameObject bttn = EventSystem.current.currentSelectedGameObject;
+
+        if (bttn.transform.childCount > 0)
+        {
+            colorSelected = bttn.transform.GetSiblingIndex();
+
+            if (PlayerPrefsManager.GetPlayerPoints() >= colorCost)
+                ShowUnlockColorMessage();
+
+            return;
+        }
 
         if (panel == 1)
         {
@@ -106,9 +142,48 @@ public class ShopUI : MonoBehaviour
         }
     }
 
+    private void ShowUnlockColorMessage()
+    {
+        colorUnlockPanel.SetActive(true);
+    }
+
+    private void ShowUnlockSkinMessage(int skinID)
+    {
+        int achievID = shopItems.Find(item => item.category == mechanicID && item.number == skinID).achievToUnlockID;
+        skinUnlockPanel.GetComponentsInChildren<Text>()[1].text = "Complete \"" + AchievementManager.GetAchievement(achievID).name +
+                                                                  "\" to unlock this skin!";
+
+        skinUnlockPanel.SetActive(true);
+    }
+
+    public void HideUnlockSkinMessage()
+    {
+        skinUnlockPanel.SetActive(false);
+    }
+
+    public void ColorUnlockResponse(bool option)
+    {
+        if (option)
+        {
+            Destroy(firstColorList.transform.GetChild(colorSelected).transform.GetChild(0).gameObject);
+            PlayerPrefsManager.SetPlayerPoints(PlayerPrefsManager.GetPlayerPoints() - colorCost);
+            SQLDataBase.SaveShopItem(10, colorSelected);
+            playerPoints.text = "Points: " + PlayerPrefsManager.GetPlayerPoints();
+        }
+
+        colorUnlockPanel.SetActive(false);
+    }
+
     public void SkinChanged()
     {
         GameObject bttn = EventSystem.current.currentSelectedGameObject;
+
+        if (bttn.transform.childCount > 0)
+        {
+            ShowUnlockSkinMessage(bttn.transform.GetSiblingIndex());
+            return;
+        }
+
         skinInfo.skinSelected = bttn.transform.GetSiblingIndex();
         skinSelect.anchoredPosition = bttn.GetComponent<RectTransform>().anchoredPosition;
         SetSpritePreview();
@@ -121,5 +196,21 @@ public class ShopUI : MonoBehaviour
         skinInfo = GameSettings.Instance.skinInfo[mechanicID];
         LoadSkins();
         LoadColor();
+    }
+}
+
+public class ShopItem
+{
+    internal int category;
+    internal int number;
+    internal bool unlocked;
+    internal int achievToUnlockID;
+
+    public ShopItem(int cat, int num, bool unl, int id)
+    {
+        this.category = cat;
+        this.number = num;
+        this.unlocked = unl;
+        this.achievToUnlockID = id;
     }
 }

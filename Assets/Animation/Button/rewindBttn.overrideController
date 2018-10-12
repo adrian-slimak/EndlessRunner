@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: rewindBttn
+  m_Controller: {fileID: 9100000, guid: 44d626a296a8f5e42a38a7f8c891545c, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 05334920601a98f429050420842d1ed7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 05334920601a98f429050420842d1ed7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b6c9e0326407a8f47a0c8e609faaff92, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fb8a7d9a70dbc61429ec907159a904aa, type: 2}

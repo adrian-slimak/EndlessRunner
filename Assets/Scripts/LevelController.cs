@@ -7,7 +7,6 @@ public class LevelController : MonoBehaviour
     public static LevelController Instance;
 
     internal LevelInfo levelInfo;
-    new Transform camera;
     GameplayUI gameplayUI;
 
     public int levelID = -1;
@@ -17,20 +16,19 @@ public class LevelController : MonoBehaviour
     public int levelLength;
     public float DeathRestartDelay = 3f;
 
-
-
-    [HideInInspector]
     public bool practiceMode = false;
 
     [HideInInspector]
     public RunnerController Player;
+    [HideInInspector]
+    public bool gamePaused = false;
 
     [HideInInspector]
-    public int totalAttempts = 1;
+    public int totalAttempts = 0;
     [HideInInspector]
     public int totalJumps = 0;
     [HideInInspector]
-    public Vector3 hiddenShardsCollected;
+    public Vector3 shardsCollected;
 
     private int levelProgress;
 
@@ -45,7 +43,9 @@ public class LevelController : MonoBehaviour
         }
         else Destroy(this);
 
-        hiddenShardsCollected = Vector3.zero;
+        Instance.totalAttempts++;
+        Instance.levelInfo.totalAttempts++;
+        shardsCollected = Vector3.zero;
         Instance.Player = GameObject.FindGameObjectWithTag("Player").GetComponent<RunnerController>();
         Instance.gameplayUI = FindObjectOfType<GameplayUI>();
     }
@@ -58,6 +58,11 @@ public class LevelController : MonoBehaviour
 
     public static void PlayerDied() // BUG jak ktoś zresetuje level kiedy player zginie
     {
+        if (Instance.practiceMode)
+        { TimeController.PlayerDied(); return; }
+
+        Instance.SaveLevel();
+
         if (GameSettings.Instance.autoRetry)
             Instance.Invoke("RestartLevel", Instance.DeathRestartDelay);
         else
@@ -66,14 +71,11 @@ public class LevelController : MonoBehaviour
 
     private void RestartLevel()
     {
-        Instance.totalAttempts++;
-        Instance.levelInfo.totalAttempts++;
-
         SceneLoader.RestartCurrentScene();
     }
 
     private void ShowGameOverPanel()
-    {    Instance.gameplayUI.ShowGameOverPanel();   }
+    {    Instance.gameplayUI.ShowGameOverPanel(); PauseGame(); }
 
     public static void LevelFinished()
     {
@@ -84,22 +86,28 @@ public class LevelController : MonoBehaviour
         }
         else
         {
+            if (Instance.levelInfo.shardsCollected.x == 0)
+                Instance.levelInfo.shardsCollected.x = Instance.shardsCollected.x;
+            if (Instance.levelInfo.shardsCollected.y == 0)
+                Instance.levelInfo.shardsCollected.y = Instance.shardsCollected.y;
+            if (Instance.levelInfo.shardsCollected.z == 0)
+                Instance.levelInfo.shardsCollected.z = Instance.shardsCollected.z;
+
             Instance.levelInfo.levelFinished = true;
             //AchievementManager.AchievementCollected(Instance.lvlCompleteAchievID);
         }
 
         Instance.SaveLevel();
 
-        Instance.gameplayUI.ShowLevelCompletePanel(Instance.totalJumps, Instance.totalAttempts, Instance.hiddenShardsCollected);
+        Instance.gameplayUI.ShowLevelCompletePanel();
+        PauseGame();
         Instance.totalAttempts = 0;
         Instance.totalJumps = 0;
-        Instance.hiddenShardsCollected = Vector3.zero;
+        Instance.shardsCollected = Vector3.zero;
     }
 
     public static void RestartLevelStatic()
     {
-        Instance.totalAttempts++;
-        Instance.levelInfo.totalAttempts++;
         Instance.Player.gameObject.SetActive(false);
         SceneLoader.LoadLevel("Level" + Instance.levelID, animSpeed:2);
         ResumeGame();
@@ -127,7 +135,9 @@ public class LevelController : MonoBehaviour
         {
 
             levelInfo.normalModeProgress = levelProgress;
-            levelInfo.pointsCollected = (levelProgress / 100) * levelInfo.maxPoints;
+            int points = (int)((levelProgress / 100f) * levelInfo.maxPoints) - levelInfo.pointsCollected;
+            PlayerPrefsManager.SetPlayerPoints(points + PlayerPrefsManager.GetPlayerPoints());
+            levelInfo.pointsCollected += points;
         }
 
         LevelManager.SaveLevelToDataBase(levelID);
@@ -135,11 +145,13 @@ public class LevelController : MonoBehaviour
 
     public static void PauseGame()
     {
+        Instance.gamePaused = true;
         Time.timeScale = 0;
     }
 
     public static void ResumeGame()
     {
+        Instance.gamePaused = false;
         Time.timeScale = 1;
     }
 
@@ -149,21 +161,17 @@ public class LevelController : MonoBehaviour
             //AchievementManager.AchievementCollected(Instance.allHiddenShardsAchievID);
 
         if (id == 1)
-        {
-            Instance.hiddenShardsCollected.x = 1;
-            Instance.levelInfo.hiddenCoinsCollected.x = 1;
-        }
+            Instance.shardsCollected.x = 1;
 
         if (id == 2)
-        {
-            Instance.hiddenShardsCollected.y = 1;
-            Instance.levelInfo.hiddenCoinsCollected.y = 1;
-        }
+            Instance.shardsCollected.y = 1;
 
         if (id == 3)
-        {
-            Instance.hiddenShardsCollected.z = 1;
-            Instance.levelInfo.hiddenCoinsCollected.z = 1;
-        }
+            Instance.shardsCollected.z = 1;
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        SaveLevel();
     }
 }

@@ -47,11 +47,11 @@ public class LevelPanelUI : MonoBehaviour
         attemptsText.text = "Attempts: " + levelInfo.totalAttempts;
         //starsText.text = levelInfo.maxStars; // GWIAZDKI ZA UKOŃCZONY LEVEL
 
-        if (levelInfo.hiddenCoinsCollected.x == 1)
+        if (levelInfo.shardsCollected.x == 1)
         { coin1.sprite = collectedShardSprite; coin1.color = spriteColor; coin1.SetNativeSize(); }
-        if (levelInfo.hiddenCoinsCollected.y == 1)
+        if (levelInfo.shardsCollected.y == 1)
         { coin2.sprite = collectedShardSprite; coin2.color = spriteColor; coin2.SetNativeSize(); }
-        if (levelInfo.hiddenCoinsCollected.z == 1)
+        if (levelInfo.shardsCollected.z == 1)
         { coin3.sprite = collectedShardSprite; coin3.color = spriteColor; coin3.SetNativeSize(); }
     }
 

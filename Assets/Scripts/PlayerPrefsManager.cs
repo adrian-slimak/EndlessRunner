@@ -14,9 +14,20 @@ public class PlayerPrefsManager : MonoBehaviour
     const string SECOND_SKIN_COLOR = "second_skin_color";
     const string FIRST_SKIN_COLOR_INDEX = "first_skin_color_index";
 	const string SECOND_SKIN_COLOR_INDEX = "second_skin_color_index";
+    const string PLAYER_POINTS = "player_points";
 
 
-	public static void SetMusicVolume(float volume)
+    public static void SetPlayerPoints(int value)
+    {
+        PlayerPrefs.SetInt(PLAYER_POINTS, value);
+    }
+
+    public static int GetPlayerPoints()
+    {
+        return PlayerPrefs.GetInt(PLAYER_POINTS, 0);
+    }
+
+    public static void SetMusicVolume(float volume)
 	{
 		if (volume >= 0f && volume <= 1f)
 			PlayerPrefs.SetFloat (MUSIC_VOLUME_KEY, volume);

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RunnerController : MonoBehaviour // POPRAWI OnClick i OnPressed
 {
-    protected Rigidbody2D _rb2d;
+    public Rigidbody2D _rb2d;
 
     public bool isGrounded = true;
     public float speedX = 10f;
@@ -19,16 +19,21 @@ public class RunnerController : MonoBehaviour // POPRAWI OnClick i OnPressed
 
     protected void Update()
     {
+        if (LevelController.Instance.practiceMode && TimeController.Instance.isRewinding || LevelController.Instance.gamePaused) return;
+
         if (_rb2d.velocity.x < 0.1) gameOver();
 
         float speedY = _rb2d.velocity.y;
         _rb2d.velocity = new Vector2(speedX, speedY);
 
-        if(Input.touchCount > 0)
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if(touch.phase == TouchPhase.Began && touch.position.x > Screen.width * 0.1 && touch.position.y < Screen.height * 0.9)
             onClick();
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
-            //if (Input.GetTouch(0).phase == TouchPhase.Began)
             onClick();
 
         if (Input.GetKeyDown(KeyCode.R)) LevelController.PlayerDied();

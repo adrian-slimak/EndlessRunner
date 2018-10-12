@@ -71,6 +71,6 @@ public class LevelInfo
     public int practiceModeProgress = -1;
 
     public int pointsCollected = -1;
-    public Vector3 hiddenCoinsCollected = new Vector3(-1, -1, -1);
+    public Vector3 shardsCollected = new Vector3(-1, -1, -1);
 
 }

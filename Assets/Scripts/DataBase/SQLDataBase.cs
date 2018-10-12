@@ -72,7 +72,7 @@ public class SQLDataBase : MonoBehaviour
                           ", normalModeProgress = " + levelInfo.normalModeProgress +
                           ", practiceModeProgress = " + levelInfo.practiceModeProgress +
                           ", pointsCollected = " + levelInfo.pointsCollected +
-                          ", hiddenCoinsCollected = \"" + levelInfo.hiddenCoinsCollected.x + "-" + levelInfo.hiddenCoinsCollected.y + "-" + levelInfo.hiddenCoinsCollected.z + "\"" + 
+                          ", hiddenCoinsCollected = \"" + levelInfo.shardsCollected.x + "-" + levelInfo.shardsCollected.y + "-" + levelInfo.shardsCollected.z + "\"" + 
                           " WHERE LevelID = \"" + levelInfo.LevelID + "\"";
 
         dbcmd.CommandText = sqlQuery;
@@ -117,6 +117,21 @@ public class SQLDataBase : MonoBehaviour
         dbcmd = null;
     }
 
+    internal static void SaveShopItem(int category, int number)
+    {
+        IDbCommand dbcmd = Instance.dbconn.CreateCommand();
+
+        string sqlQuery = "UPDATE ShopItems " +
+                          "SET unlocked = 1 " + 
+                          "WHERE category = \"" + category + "\" AND number = \"" + number + "\"";
+
+        dbcmd.CommandText = sqlQuery;
+        dbcmd.ExecuteNonQuery();
+
+        dbcmd.Dispose();
+        dbcmd = null;
+    }
+
     internal static Dictionary<int, LevelInfo> LoadLevels()
     {
         Dictionary<int, LevelInfo> levelInfoList = new Dictionary<int, LevelInfo>();
@@ -144,9 +159,9 @@ public class SQLDataBase : MonoBehaviour
             level.pointsCollected = reader.GetInt32(10);
             string[] hiddenCoinsCollected = reader.GetString(11).Split('-');
 
-            level.hiddenCoinsCollected.x = int.Parse(hiddenCoinsCollected[0]);
-            level.hiddenCoinsCollected.y = int.Parse(hiddenCoinsCollected[1]);
-            level.hiddenCoinsCollected.z = int.Parse(hiddenCoinsCollected[2]);
+            level.shardsCollected.x = int.Parse(hiddenCoinsCollected[0]);
+            level.shardsCollected.y = int.Parse(hiddenCoinsCollected[1]);
+            level.shardsCollected.z = int.Parse(hiddenCoinsCollected[2]);
             levelInfoList.Add(levelID, level);
         }
 
@@ -219,7 +234,29 @@ public class SQLDataBase : MonoBehaviour
         dbcmd = null;
 
         return skins;
+    }
 
+    internal static List<ShopItem> LoadShopItems()
+    {
+        List<ShopItem> items = new List<ShopItem>();
+
+        IDbCommand dbcmd = Instance.dbconn.CreateCommand();
+        string sqlQuery = "SELECT * " + "FROM ShopItems";
+        dbcmd.CommandText = sqlQuery;
+        IDataReader reader = dbcmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            ShopItem item = new ShopItem(reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3) == 0 ? false : true , reader.GetInt32(4));
+            items.Add(item);
+        }
+
+        reader.Close();
+        reader = null;
+        dbcmd.Dispose();
+        dbcmd = null;
+
+        return items;
     }
 
     static string ColorToHex(Color32 color)

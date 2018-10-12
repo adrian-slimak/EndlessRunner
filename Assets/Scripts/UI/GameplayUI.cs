@@ -29,13 +29,11 @@ public class GameplayUI : MonoBehaviour
 
     public void ShowGameOverPanel()
     {
-        gameOverPanel.SetActive(true);
         LevelController.PauseGame();
     }
 
-    public void ShowLevelCompletePanel(int totalJumps, int totalAttempts, Vector3 hiddenCoinsCollected)
+    public void ShowLevelCompletePanel()
     {
-        levelCompletePanel.SetActive(true);
         LevelController.PauseGame();
     }
 
