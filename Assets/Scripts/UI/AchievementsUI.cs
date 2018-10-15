@@ -70,12 +70,9 @@ public class AchievementsUI : MonoBehaviour
 
     private void SetButton()
     {
-        Image newBttn = EventSystem.current.currentSelectedGameObject.transform.GetChild(0).GetComponent<Image>();
+        Image newBttn = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
         Color color = currentBttn.color;
-        color.a = 0;
-        currentBttn.color = color;
-        color = newBttn.color;
-        color.a = 255;
+        currentBttn.color = newBttn.color;
         newBttn.color = color;
         currentBttn = newBttn;
     }

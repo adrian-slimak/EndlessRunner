@@ -34,6 +34,7 @@ public class GameplayUI : MonoBehaviour
 
     public void ShowLevelCompletePanel()
     {
+        levelCompletePanel.SetActive(true);
         LevelController.PauseGame();
     }
 

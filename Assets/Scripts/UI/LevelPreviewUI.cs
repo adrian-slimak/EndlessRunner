@@ -10,7 +10,7 @@ public class LevelPreviewUI : MonoBehaviour
 
     public GameObject levelHolder;
     public ScrollRectSnap scrollRect;
-    public Color selectedColor;
+    public RectTransform selection;
     int levelSelected = 0;
 
     private void Start()
@@ -21,7 +21,9 @@ public class LevelPreviewUI : MonoBehaviour
         for (int i = 0; i < children; i++)
         {
             levels.Add(levelHolder.transform.GetChild(i).gameObject);
-            levels[i].GetComponentInChildren<Text>().text = LevelManager.GetLevelInfo(i+1).LevelName;
+            if(levels[i].gameObject.activeSelf) // USUNĄĆ
+            if(LevelManager.GetLevelInfo(i + 1) != null)
+                levels[i].GetComponentInChildren<Text>().text = LevelManager.GetLevelInfo(i+1).LevelName;
         }
 
         //foreach (LevelInfo level in LevelManager.GetLevels())
@@ -29,7 +31,6 @@ public class LevelPreviewUI : MonoBehaviour
         //    GameObject newLevel = Instantiate(levelPrefab, levelHolder.transform);
         //    levels.Add(newLevel);
         //}
-        levels[levelSelected].GetComponent<Image>().color = selectedColor;
     }
 
     public void LoadMenu()
@@ -39,9 +40,11 @@ public class LevelPreviewUI : MonoBehaviour
 
     public void LevelClicked(int idx)
     {
-        levels[levelSelected].GetComponent<Image>().color = levels[idx].GetComponent<Image>().color;
+        Color color = levels[idx].GetComponent<Image>().color;
+        levels[idx].GetComponent<Image>().color = levels[levelSelected].GetComponent<Image>().color;
+        levels[levelSelected].GetComponent<Image>().color = color;
+        selection.position = levels[idx].GetComponent<RectTransform>().position;
         levelSelected = idx;
-        levels[levelSelected].GetComponent<Image>().color = selectedColor;
         scrollRect.SelectLevel(levelSelected);
     }
 }

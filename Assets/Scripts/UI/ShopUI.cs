@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
-    public Image image;
     public RectTransform firstSelect;
     public RectTransform secondSelect;
     public RectTransform skinSelect;
@@ -33,6 +32,8 @@ public class ShopUI : MonoBehaviour
     private Sprite[] firstSprites;
     private Sprite[] secondSprites;
 
+    int flag = 10;
+
     private void Start()
     {
         if (shopItems == null)
@@ -40,20 +41,24 @@ public class ShopUI : MonoBehaviour
 
         skinInfo = GameSettings.Instance.skinInfo[mechanicID];
         playerPoints.text = "Points: " + PlayerPrefsManager.GetPlayerPoints();
+
+        firstSelect.SetParent(firstColorList.transform);
+        secondSelect.SetParent(secondColorList.transform);
+
         SetColorsList();
         LoadSkins();
-    }
-
-    private void Update()
-    {
-        LoadColor(); // TO TYLKO CHWILOWE
-        skinSelect.anchoredPosition = skinList.transform.GetChild(skinInfo.skinSelected).GetComponent<RectTransform>().anchoredPosition;
-
+        Invoke("SetSelectionsPos", 0.1f);
     }
 
     public void LoadMenu()
     {
         SceneLoader.LoadLevel("Menu");
+    }
+
+    public void SetSelectionsPos()
+    {
+        SetSelectedColorPos();
+        skinSelect.anchoredPosition = skinList.transform.GetChild(skinInfo.skinSelected).GetComponent<RectTransform>().anchoredPosition;
     }
 
     private void SetColorsList()
@@ -68,10 +73,10 @@ public class ShopUI : MonoBehaviour
             }
         }
 
-        LoadColor();
+        SetSelectedColorPos();
     }
 
-    private void LoadColor()
+    private void SetSelectedColorPos()
     {
         firstSelect.anchoredPosition = firstColorList.transform.GetChild(skinInfo.firstColorIndex).GetComponent<RectTransform>().anchoredPosition;
         secondSelect.anchoredPosition = secondColorList.transform.GetChild(skinInfo.secondColorIndex).GetComponent<RectTransform>().anchoredPosition;
@@ -97,6 +102,8 @@ public class ShopUI : MonoBehaviour
         skinFirst.color = skinInfo.firstColor;
         skinSecond.color = skinInfo.secondColor;
 
+        skinSelect.anchoredPosition = skinList.transform.GetChild(skinInfo.skinSelected).GetComponent<RectTransform>().anchoredPosition;
+
         SetSpritePreview();
     }
 
@@ -115,10 +122,7 @@ public class ShopUI : MonoBehaviour
         if (bttn.transform.childCount > 0)
         {
             colorSelected = bttn.transform.GetSiblingIndex();
-
-            if (PlayerPrefsManager.GetPlayerPoints() >= colorCost)
-                ShowUnlockColorMessage();
-
+            ShowUnlockColorMessage();
             return;
         }
 
@@ -145,6 +149,17 @@ public class ShopUI : MonoBehaviour
     private void ShowUnlockColorMessage()
     {
         colorUnlockPanel.SetActive(true);
+        Text messageText = colorUnlockPanel.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
+        if (PlayerPrefsManager.GetPlayerPoints() < colorCost)
+        {
+            messageText.text = "You need " + colorCost + " points to unlock this color!";
+            colorUnlockPanel.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        }
+        else
+        {
+            messageText.text = "Do you want to unlock this color for " + colorCost + " points?";
+            colorUnlockPanel.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        }
     }
 
     private void ShowUnlockSkinMessage(int skinID)
@@ -166,6 +181,7 @@ public class ShopUI : MonoBehaviour
         if (option)
         {
             Destroy(firstColorList.transform.GetChild(colorSelected).transform.GetChild(0).gameObject);
+            Destroy(secondColorList.transform.GetChild(colorSelected).transform.GetChild(0).gameObject);
             PlayerPrefsManager.SetPlayerPoints(PlayerPrefsManager.GetPlayerPoints() - colorCost);
             SQLDataBase.SaveShopItem(10, colorSelected);
             playerPoints.text = "Points: " + PlayerPrefsManager.GetPlayerPoints();
@@ -194,8 +210,7 @@ public class ShopUI : MonoBehaviour
     {
         mechanicID = id;
         skinInfo = GameSettings.Instance.skinInfo[mechanicID];
-        LoadSkins();
-        LoadColor();
+        SetSelectionsPos();
     }
 }
 

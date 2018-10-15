@@ -31,7 +31,10 @@ public class LevelManager : MonoBehaviour
 
     public static LevelInfo GetLevelInfo(int levelID)
     {
-        return Instance.gameLevelsInfo[levelID];
+        if (Instance.gameLevelsInfo.ContainsKey(levelID))
+            return Instance.gameLevelsInfo[levelID];
+        else
+            return null;
     }
 
     public static List<LevelInfo> GetLevels()

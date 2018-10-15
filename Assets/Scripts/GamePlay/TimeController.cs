@@ -87,7 +87,6 @@ public class TimeController : MonoBehaviour
     public void RewindingTime()
     {
         rewindBttn.SetBool("Play", true);
-        Debug.Log("rew");
         if (timePaused) Time.timeScale = 1;
         isRewinding = true;
         player._rb2d.isKinematic = true;

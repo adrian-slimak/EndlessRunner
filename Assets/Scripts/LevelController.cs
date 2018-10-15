@@ -7,7 +7,7 @@ public class LevelController : MonoBehaviour
     public static LevelController Instance;
 
     internal LevelInfo levelInfo;
-    GameplayUI gameplayUI;
+    public GameplayUI gameplayUI;
 
     public int levelID = -1;
     public int lvlCompleteAchievID;
@@ -18,7 +18,6 @@ public class LevelController : MonoBehaviour
 
     public bool practiceMode = false;
 
-    [HideInInspector]
     public RunnerController Player;
     [HideInInspector]
     public bool gamePaused = false;
@@ -44,7 +43,7 @@ public class LevelController : MonoBehaviour
         else Destroy(this);
 
         Instance.totalAttempts++;
-        Instance.levelInfo.totalAttempts++;
+        if(!practiceMode) Instance.levelInfo.totalAttempts++;
         shardsCollected = Vector3.zero;
         Instance.Player = GameObject.FindGameObjectWithTag("Player").GetComponent<RunnerController>();
         Instance.gameplayUI = FindObjectOfType<GameplayUI>();
@@ -98,7 +97,6 @@ public class LevelController : MonoBehaviour
         }
 
         Instance.SaveLevel();
-
         Instance.gameplayUI.ShowLevelCompletePanel();
         PauseGame();
         Instance.totalAttempts = 0;
