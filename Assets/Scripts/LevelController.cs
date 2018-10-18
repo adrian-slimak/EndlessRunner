@@ -44,6 +44,8 @@ public class LevelController : MonoBehaviour
 
         Instance.totalAttempts++;
         if(!practiceMode) Instance.levelInfo.totalAttempts++;
+        PlayerStatsistics.Instance.totalPlayerAttempts++;
+        AchievementManager.CheckAttemptsAchiev();
         shardsCollected = Vector3.zero;
         Instance.Player = GameObject.FindGameObjectWithTag("Player").GetComponent<RunnerController>();
         Instance.gameplayUI = FindObjectOfType<GameplayUI>();
@@ -53,6 +55,8 @@ public class LevelController : MonoBehaviour
     {
         Instance.levelInfo.totalJumps++;
         Instance.totalJumps++;
+        PlayerStatsistics.Instance.totalPlayerJumps++;
+        AchievementManager.CheckJumpsAchiev();
     }
 
     public static void PlayerDied() // BUG jak ktoś zresetuje level kiedy player zginie
@@ -74,26 +78,37 @@ public class LevelController : MonoBehaviour
     }
 
     private void ShowGameOverPanel()
-    {    Instance.gameplayUI.ShowGameOverPanel(); PauseGame(); }
+    {    Instance.gameplayUI.ShowGameOverPanel(); }
 
     public static void LevelFinished()
     {
         if (Instance.practiceMode)
         {
             Instance.levelInfo.levelFinishedPractice = true;
-            //AchievementManager.AchievementCollected(Instance.lvlCompletePracticeAchievID);
+            AchievementManager.AchievementCollected(Instance.lvlCompletePracticeAchievID);
         }
         else
         {
-            if (Instance.levelInfo.shardsCollected.x == 0)
-                Instance.levelInfo.shardsCollected.x = Instance.shardsCollected.x;
-            if (Instance.levelInfo.shardsCollected.y == 0)
-                Instance.levelInfo.shardsCollected.y = Instance.shardsCollected.y;
-            if (Instance.levelInfo.shardsCollected.z == 0)
-                Instance.levelInfo.shardsCollected.z = Instance.shardsCollected.z;
+            if (Instance.levelInfo.shardsCollected.x == 0 && Instance.shardsCollected.x == 1)
+            { Instance.levelInfo.shardsCollected.x = 1; PlayerStatsistics.Instance.totalHiddenShardsCollected++; }
+            if (Instance.levelInfo.shardsCollected.y == 0 && Instance.shardsCollected.y == 1)
+            { Instance.levelInfo.shardsCollected.y = 1; PlayerStatsistics.Instance.totalHiddenShardsCollected++; }
+            if (Instance.levelInfo.shardsCollected.z == 0 && Instance.shardsCollected.z == 1)
+            { Instance.levelInfo.shardsCollected.z = 1; PlayerStatsistics.Instance.totalHiddenShardsCollected++; }
 
-            Instance.levelInfo.levelFinished = true;
-            //AchievementManager.AchievementCollected(Instance.lvlCompleteAchievID);
+            if (Instance.shardsCollected == Vector3.one)
+                AchievementManager.AchievementCollected(Instance.allHiddenShardsAchievID);
+
+            AchievementManager.CheckHiddenShardsAchiev();
+
+            if (!Instance.levelInfo.levelFinished)
+            {
+                PlayerStatsistics.Instance.totalStarsCollected += Instance.levelInfo.maxStars;
+                Instance.levelInfo.levelFinished = true;
+                AchievementManager.AchievementCollected(Instance.lvlCompleteAchievID);
+            }
+
+            AchievementManager.CheckStarsCollectedAchiev();
         }
 
         Instance.SaveLevel();
@@ -138,6 +153,7 @@ public class LevelController : MonoBehaviour
             levelInfo.pointsCollected += points;
         }
 
+        PlayerStatsistics.SaveStats();
         LevelManager.SaveLevelToDataBase(levelID);
     }
 
@@ -155,9 +171,6 @@ public class LevelController : MonoBehaviour
 
     public static void HiddenShardCollected(int id)
     {
-        //if (Instance.hiddenCoinsCollected == Vector3.one)
-            //AchievementManager.AchievementCollected(Instance.allHiddenShardsAchievID);
-
         if (id == 1)
             Instance.shardsCollected.x = 1;
 
@@ -166,6 +179,7 @@ public class LevelController : MonoBehaviour
 
         if (id == 3)
             Instance.shardsCollected.z = 1;
+
     }
 
     private void OnApplicationPause(bool pause)

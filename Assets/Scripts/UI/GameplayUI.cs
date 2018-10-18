@@ -29,6 +29,7 @@ public class GameplayUI : MonoBehaviour
 
     public void ShowGameOverPanel()
     {
+        gameOverPanel.SetActive(true);
         LevelController.PauseGame();
     }
 

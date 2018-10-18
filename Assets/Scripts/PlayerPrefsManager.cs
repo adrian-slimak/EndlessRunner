@@ -10,10 +10,12 @@ public class PlayerPrefsManager : MonoBehaviour
 	const string RESTART_BUTTON_KEY = "restart_button";
 	const string GAME_PROGRESS_SLIDER_KEY = "game_progress_slider";
 
-    const string FIRST_SKIN_COLOR = "first_skin_color";
-    const string SECOND_SKIN_COLOR = "second_skin_color";
-    const string FIRST_SKIN_COLOR_INDEX = "first_skin_color_index";
-	const string SECOND_SKIN_COLOR_INDEX = "second_skin_color_index";
+    const string TOTAL_PLAYER_ATTEMPTS = "total_player_attempts";
+    const string TOTAL_PLAYER_JUMPS = "total_player_jumps";
+    const string TOTAL_TIME_REWINDED = "total_time_rewinded";
+    const string TOTAL_HIDDEN_SHARDS_COLLECTED = "total_hidden_shards_collected";
+    const string TOTAL_STARS_COLLECTED = "total_stars_collected";
+    const string TOTAL_COLORS_UNLOCKED = "total_colors_unlocked";
     const string PLAYER_POINTS = "player_points";
 
 
@@ -25,6 +27,66 @@ public class PlayerPrefsManager : MonoBehaviour
     public static int GetPlayerPoints()
     {
         return PlayerPrefs.GetInt(PLAYER_POINTS, 0);
+    }
+
+    public static void SetTotalPlayerAttempts(int value)
+    {
+        PlayerPrefs.SetInt(TOTAL_PLAYER_ATTEMPTS, value);
+    }
+
+    public static int GetTotalPlayerAttempts()
+    {
+        return PlayerPrefs.GetInt(TOTAL_PLAYER_ATTEMPTS, 0);
+    }
+
+    public static void SetTotalPlayerJumps(int value)
+    {
+        PlayerPrefs.SetInt(TOTAL_PLAYER_JUMPS, value);
+    }
+
+    public static int GetTotalPlayerJumps()
+    {
+        return PlayerPrefs.GetInt(TOTAL_PLAYER_JUMPS, 0);
+    }
+
+    public static void SetTotalTimeRewinded(float value)
+    {
+        PlayerPrefs.SetFloat(TOTAL_TIME_REWINDED, value);
+    }
+
+    public static float GetTotalTimeRwinded()
+    {
+        return PlayerPrefs.GetFloat(TOTAL_TIME_REWINDED, 0);
+    }
+
+    public static void SetTotalHiddenCollected(int value)
+    {
+        PlayerPrefs.SetInt(TOTAL_HIDDEN_SHARDS_COLLECTED, value);
+    }
+
+    public static int GetTotalHiddenCollected()
+    {
+        return PlayerPrefs.GetInt(TOTAL_HIDDEN_SHARDS_COLLECTED, 0);
+    }
+
+    public static void SetTotalStarsCollected(int value)
+    {
+        PlayerPrefs.SetInt(TOTAL_STARS_COLLECTED, value);
+    }
+
+    public static int GetTotalStarsCollected()
+    {
+        return PlayerPrefs.GetInt(TOTAL_STARS_COLLECTED, 0);
+    }
+
+    public static void SetTotalColorsUnlocked(int value)
+    {
+        PlayerPrefs.SetInt(TOTAL_COLORS_UNLOCKED, value);
+    }
+
+    public static int GetTotalColorsUnlocked()
+    {
+        return PlayerPrefs.GetInt(TOTAL_COLORS_UNLOCKED, 6);
     }
 
     public static void SetMusicVolume(float volume)

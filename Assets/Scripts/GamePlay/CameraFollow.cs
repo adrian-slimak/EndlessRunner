@@ -28,7 +28,7 @@ public class CameraFollow : MonoBehaviour
 	void FixedUpdate ()
     {
         if (playerToFollow == null) playerToFollow = LevelController.Instance.Player.gameObject;
-        if (playerToFollow.transform.position.x < -3 || playerToFollow.transform.position.x > cameraStopFollow) return;
+        if (playerToFollow.transform.position.x < -3 || transform.position.x > cameraStopFollow) return;
 
         if (!cameraYLocked)
         {

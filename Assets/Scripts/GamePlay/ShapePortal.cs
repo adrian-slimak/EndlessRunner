@@ -50,4 +50,9 @@ public class ShapePortal : MonoBehaviour
             CameraController.Instance.nextState();
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        
+    }
 }

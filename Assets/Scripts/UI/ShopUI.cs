@@ -32,8 +32,6 @@ public class ShopUI : MonoBehaviour
     private Sprite[] firstSprites;
     private Sprite[] secondSprites;
 
-    int flag = 10;
-
     private void Start()
     {
         if (shopItems == null)
@@ -180,6 +178,7 @@ public class ShopUI : MonoBehaviour
     {
         if (option)
         {
+            PlayerStatsistics.NewColorUnlocked();
             Destroy(firstColorList.transform.GetChild(colorSelected).transform.GetChild(0).gameObject);
             Destroy(secondColorList.transform.GetChild(colorSelected).transform.GetChild(0).gameObject);
             PlayerPrefsManager.SetPlayerPoints(PlayerPrefsManager.GetPlayerPoints() - colorCost);

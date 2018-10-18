@@ -59,4 +59,9 @@ public class LevelPanelUI : MonoBehaviour
     {
         SceneLoader.LoadLevel("Level"+LevelID);
     }
+
+    public void LoadLevelPractice()
+    {
+        SceneLoader.LoadLevel("Level" + LevelID + "_practice");
+    }
 }

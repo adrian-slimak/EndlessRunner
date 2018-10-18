@@ -61,6 +61,8 @@ public class TimeController : MonoBehaviour
 
         if (position.Count > 0)
         {
+            PlayerStatsistics.Instance.totalTimeRewinded += Time.deltaTime;
+            AchievementManager.CheckTimeRewindedAchiev();
             player._rb2d.position = position.Pop();
             player._rb2d.rotation = rotation.Pop();
             player._rb2d.velocity = velocity.Pop();

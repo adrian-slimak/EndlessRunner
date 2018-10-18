@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4461640879578282}
   - component: {fileID: 212739227975665294}
   - component: {fileID: 61598836796837822}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: blocks_1_13
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4791962092816570}
   - component: {fileID: 212140475564237732}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
