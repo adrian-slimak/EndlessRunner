@@ -80,7 +80,7 @@ public class ShopUI : MonoBehaviour
         secondSelect.anchoredPosition = secondColorList.transform.GetChild(skinInfo.secondColorIndex).GetComponent<RectTransform>().anchoredPosition;
     }
 
-    private void LoadSkins() //POPRAWIĆ ŚCIEŻKĘ DO SKINÓW
+    private void LoadSkins()
     {
         skinSprites = Resources.LoadAll<Sprite>("Skins/" + skinInfo.spriteName);
         firstSprites = Resources.LoadAll<Sprite>("Skins/" + skinInfo.spriteName+"_first");
@@ -91,7 +91,9 @@ public class ShopUI : MonoBehaviour
             Transform skin = skinList.transform.GetChild(i);
             skin.GetComponent<Image>().sprite = skinSprites[i];
             if (shopItems.Find(item => item.category == mechanicID && item.number == i && item.unlocked) != null)
-                Destroy(skin.GetChild(0).gameObject);
+                skin.GetChild(0).gameObject.SetActive(false);
+            else
+                skin.GetChild(0).gameObject.SetActive(true);
         }
 
         for (int i = skinSprites.Length; i < skinList.transform.childCount; i++)
@@ -193,7 +195,7 @@ public class ShopUI : MonoBehaviour
     {
         GameObject bttn = EventSystem.current.currentSelectedGameObject;
 
-        if (bttn.transform.childCount > 0)
+        if (bttn.transform.GetChild(0).gameObject.activeSelf)
         {
             ShowUnlockSkinMessage(bttn.transform.GetSiblingIndex());
             return;
@@ -209,6 +211,7 @@ public class ShopUI : MonoBehaviour
     {
         mechanicID = id;
         skinInfo = GameSettings.Instance.skinInfo[mechanicID];
+        LoadSkins();
         SetSelectionsPos();
     }
 }

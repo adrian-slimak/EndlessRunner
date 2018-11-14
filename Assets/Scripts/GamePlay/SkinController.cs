@@ -20,5 +20,7 @@ public class SkinController : MonoBehaviour
 
         skinFirst.color = skinInfo.firstColor;
         skinSecond.color = skinInfo.secondColor;
+
+        Debug.Log(skinFirst.color);
     }
 }

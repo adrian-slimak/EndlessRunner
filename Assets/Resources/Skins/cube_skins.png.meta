@@ -7,7 +7,6 @@ TextureImporter:
     21300004: cube_skins_2
     21300006: cube_skins_3
     21300008: cube_skins_4
-    21300010: cube_skins_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -51,7 +50,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,9 +104,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 200
-        width: 200
-        height: 200
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,7 +114,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17db0506232207244baea780724c617b
+      spriteID: 5c13310b0514a0d44a605039b25672c2
       vertices: []
       indices: 
       edges: []
@@ -124,10 +123,10 @@ TextureImporter:
       name: cube_skins_1
       rect:
         serializedVersion: 2
-        x: 200
-        y: 200
-        width: 200
-        height: 200
+        x: 128
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,7 +134,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 604dbecb4ca137140b9962b46d1cf258
+      spriteID: efc6dc2b792cc1d409b2cad6193b4b90
       vertices: []
       indices: 
       edges: []
@@ -144,10 +143,10 @@ TextureImporter:
       name: cube_skins_2
       rect:
         serializedVersion: 2
-        x: 400
-        y: 200
-        width: 200
-        height: 200
+        x: 256
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80bda921902f5dc4ca2ee3cf56ba2927
+      spriteID: 187a24941759c6244824a8f2b57e80eb
       vertices: []
       indices: 
       edges: []
@@ -164,10 +163,10 @@ TextureImporter:
       name: cube_skins_3
       rect:
         serializedVersion: 2
-        x: 600
-        y: 200
-        width: 200
-        height: 200
+        x: 384
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,7 +174,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c15e2c796b99734e8822fd5e67fbe85
+      spriteID: b342bfe6343f8144f853b16efaadc74e
       vertices: []
       indices: 
       edges: []
@@ -184,10 +183,10 @@ TextureImporter:
       name: cube_skins_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 512
         y: 0
-        width: 200
-        height: 200
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,27 +194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 229e721a649cfe14a867e3f613be4887
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cube_skins_5
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 0
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d6661cde2713bbe43b7457f73de19bb2
+      spriteID: 0d04449de89558f42ae1ee3d1516b7a2
       vertices: []
       indices: 
       edges: []
@@ -223,7 +202,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 48e75169046646140b7cb07c2fc1fff8
+    spriteID: ddff612ec4ccbfd47a1bbf163c2dd9d2
     vertices: []
     indices: 
     edges: []

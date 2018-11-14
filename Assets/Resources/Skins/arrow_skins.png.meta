@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 0b2db67cc64c2154abee8158ae1b61a2
+guid: 2f06ea65a926b294bb8f08adcdd73878
 TextureImporter:
   fileIDToRecycleName:
-    21300000: cube_skins_first_0
-    21300002: cube_skins_first_1
-    21300004: cube_skins_first_2
-    21300006: cube_skins_first_3
-    21300008: cube_skins_first_4
+    21300000: arrow_skins_0
+    21300002: arrow_skins_1
+    21300004: arrow_skins_2
+    21300006: arrow_skins_3
+    21300008: arrow_skins_4
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cube_skins_first_0
+      name: arrow_skins_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 60
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,19 +114,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f7e76ca70c8a59498052d5a70be8223
+      spriteID: 625a76aeba1a6924ea360a45a0053378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cube_skins_first_1
+      name: arrow_skins_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 60
         y: 0
-        width: 128
-        height: 128
+        width: 60
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,19 +134,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6a433b89b40a1c419d5f06a451162ff
+      spriteID: 66825b5916271be498d1c4370b3f1196
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cube_skins_first_2
+      name: arrow_skins_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 120
         y: 0
-        width: 128
-        height: 128
+        width: 60
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,19 +154,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2532f9cab22a330408e99740b74b97cf
+      spriteID: 2f0ec43cb4c666049b7185b65fd0e930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cube_skins_first_3
+      name: arrow_skins_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 180
         y: 0
-        width: 128
-        height: 128
+        width: 60
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,19 +174,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b210044386b26da458034bcb08bb2c55
+      spriteID: 28f96b5842a399b41bc12ec79ac69012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cube_skins_first_4
+      name: arrow_skins_4
       rect:
         serializedVersion: 2
-        x: 512
+        x: 240
         y: 0
-        width: 128
-        height: 128
+        width: 60
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,7 +194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad2ad9bb90f31d8459d711026bb4082f
+      spriteID: be2ea60592b7a904cbfc7a2c57d08801
       vertices: []
       indices: 
       edges: []
@@ -202,7 +202,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c27a0ac4600261e428ce2d8fcedc44a7
+    spriteID: c12468bcbdb5ea149ad39c0dc69796b0
     vertices: []
     indices: 
     edges: []

@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 0b2db67cc64c2154abee8158ae1b61a2
+guid: 173ef066c9b46b24891ee665d3cdba02
 TextureImporter:
   fileIDToRecycleName:
-    21300000: cube_skins_first_0
-    21300002: cube_skins_first_1
-    21300004: cube_skins_first_2
-    21300006: cube_skins_first_3
-    21300008: cube_skins_first_4
+    21300000: circle_skins_second_0
+    21300002: circle_skins_second_1
+    21300004: circle_skins_second_2
+    21300006: circle_skins_second_3
+    21300008: circle_skins_second_4
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cube_skins_first_0
+      name: circle_skins_second_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,19 +114,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f7e76ca70c8a59498052d5a70be8223
+      spriteID: 27d0dfab7dcfdef4585b5c7e6714c322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cube_skins_first_1
+      name: circle_skins_second_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 70
         y: 0
-        width: 128
-        height: 128
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,19 +134,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6a433b89b40a1c419d5f06a451162ff
+      spriteID: 4ef279feca7c5f14cba48e75878b7bce
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cube_skins_first_2
+      name: circle_skins_second_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 140
         y: 0
-        width: 128
-        height: 128
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,19 +154,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2532f9cab22a330408e99740b74b97cf
+      spriteID: 20c7548509f94754b9c6857d06431494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cube_skins_first_3
+      name: circle_skins_second_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 210
         y: 0
-        width: 128
-        height: 128
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,19 +174,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b210044386b26da458034bcb08bb2c55
+      spriteID: 304075a3028a02e409713cdec904d16c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cube_skins_first_4
+      name: circle_skins_second_4
       rect:
         serializedVersion: 2
-        x: 512
+        x: 280
         y: 0
-        width: 128
-        height: 128
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,7 +194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad2ad9bb90f31d8459d711026bb4082f
+      spriteID: 7d578cbf510e95d468a945660f04d1c2
       vertices: []
       indices: 
       edges: []
@@ -202,7 +202,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c27a0ac4600261e428ce2d8fcedc44a7
+    spriteID: 0f8d17fcf22fda64fb132885ead85e93
     vertices: []
     indices: 
     edges: []
