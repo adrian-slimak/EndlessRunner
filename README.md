@@ -19,8 +19,8 @@ It is an arcade platform game of the endless runner genre. The game's mechanics 
 
 <div align="center">
 <img src="https://user-images.githubusercontent.com/34355536/96029672-48230700-0e5b-11eb-9e48-bd4c65bf9a48.png" width="300" />
-![2](https://user-images.githubusercontent.com/34355536/96029755-625ce500-0e5b-11eb-8109-3f2045d93860.png)
-![3](https://user-images.githubusercontent.com/34355536/96029754-61c44e80-0e5b-11eb-8454-e02d0c74c758.png)
+<img src="https://user-images.githubusercontent.com/34355536/96029755-625ce500-0e5b-11eb-8109-3f2045d93860.png" width="300" />
+<img src="(https://user-images.githubusercontent.com/34355536/96029754-61c44e80-0e5b-11eb-8454-e02d0c74c758.png" width="300" />
 ![4](https://user-images.githubusercontent.com/34355536/96029756-625ce500-0e5b-11eb-91a0-d00a0556efbb.png)
 ![5](https://user-images.githubusercontent.com/34355536/96029759-62f57b80-0e5b-11eb-81ab-dd65f2f5b976.png)
 ![6](https://user-images.githubusercontent.com/34355536/96029745-5ffa8b00-0e5b-11eb-95a9-39e0f6cd031e.png)
