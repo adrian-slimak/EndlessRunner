@@ -14,6 +14,7 @@ It is an arcade platform game of the endless runner genre. The game's mechanics 
 * Achievements
 * Leaderboard
 * In game store with skins to customize every vehicle
+* Practice mode that allows to stop and reverse time
 
 ## Screenshots
 
